@@ -1,16 +1,20 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Your Emotion</title>
-    <script src="/home/enclaveit/SeniorProject/FlirtAnalyzer/EDfT/static/js/canvasjs.min.js"></script>
-    <script src="/home/enclaveit/SeniorProject/FlirtAnalyzer/EDfT/static/js/jquery.canvasjs.min.js"></script>
-
-    <script>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <script type="text/javascript">
         window.onload = function() {
+            joy = Number({{emo0}}); //Joy
+            dis = Number({{emo1}}); //Disgust
+            ang = Number({{emo2}}); //Anger
+            hap = Number({{emo3}}); //Happy
+            sar = Number({{emo4}}); //Sarcasm
+            sad = Number({{emo5}}); //Sadness
             var chart = new CanvasJS.Chart("chartContainer",{
                 theme: "light1",
                 exportEnabled: true,
@@ -20,29 +24,40 @@
                 },
                 data: [{
                     type: "pie",
-                    startAngle: 0,
+                    startAngle: 25,
                     toolTipContent: "<b>{label}</b>: {y}%",
                     showInLegend:"true",
                     legendText: "{label}",
                     indexLabelFontSize: 16,
                     indexLabel: "{label}" - "{y}%",
-                    dataPoint: [
-                        {y:50, label:"Joy"},
-                        {y:15, label:"Disgust"},
-                        {y:10, label:"Anger"},
-                        {y:10, label:"Happy"},
-                        {y:10, label:"Sarcasm"},
-                        {y:5, label:"Sadness"}
+                    dataPoints: [
+                        {y:joy, label:"Joy"},
+                        {y:dis, label:"Disgust"},
+                        {y:ang, label:"Anger"},
+                        {y:hap, label:"Happy"},
+                        {y:sar, label:"Sarcasm"},
+                        {y:sad, label:"Sadness"}
+                    ]
 
-                    ] 
                 }]
             });
+            // dPs.push({y:joy, label:'Joy'});
+            // chart.render();
+            // dPs.push({y:dis, label:'Disgust'});
+            // chart.render();
+            // dPs.push({y:ang, label:'Anger'});
+            // chart.render();
+            // dPs.push({y:hap, label:'Happy'});
+            // chart.render();
+            // dPs.push({y:sar, label:'Sarcasm'});
+            // chart.render();
+            // dPs.push({y:sad, label:'Sadness'});
             chart.render();
         }
     </script>
 </head>
 <body>
     <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
-    
+    <script src="{% static 'js/canvasjs.min.js'%}"></script>
 </body>
 </html>
