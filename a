@@ -1,0 +1,35 @@
+[33mcommit b617039d9a3d5e858d7c70407db06288361aa710[m
+Author: tawfung <tungvanle@gmail.com>
+Date:   Fri Mar 9 13:55:30 2018 +0700
+
+    Create home.html and predict.html
+
+[33mcommit af53756bb0aa622c0fbbb9d254cfed5550faf909[m
+Author: tawfung <tungvanle@gmail.com>
+Date:   Thu Mar 8 17:22:45 2018 +0700
+
+    Install some libs: Keras,..
+
+[33mcommit eede393cebb985c9ee83a8a21db23cdf45b6f2b3[m
+Author: tawfung <tungvanle@gmail.com>
+Date:   Thu Mar 8 17:21:06 2018 +0700
+
+    Create homepage of project
+
+[33mcommit 8e622a146ae23996786e6f54f1df7963c78c1432[m
+Author: tawfung <tungvanle@gmail.com>
+Date:   Thu Mar 8 11:23:56 2018 +0700
+
+    Create project
+
+[33mcommit b33ddb2c67bb302f695ed876c4dc2c5d1871001b[m
+Author: tawfung <tungvanle@gmail.com>
+Date:   Mon Feb 12 11:50:52 2018 +0700
+
+    demo
+
+[33mcommit 39df027e8b7aadd8bc4034b8e0141158d4761892[m
+Author: Tùng <tungvanle@gmail.com>
+Date:   Wed Jan 10 16:53:00 2018 +0700
+
+    Initial commit
