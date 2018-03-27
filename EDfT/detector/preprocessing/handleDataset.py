@@ -17,6 +17,7 @@ fileWorry = 'worryToken.txt'
 fileSadness = 'sadnessToken.txt'
 fileHappiness = 'happinessToken.txt'
 fileSurprise = 'surpriseToken.txt'
+fileNeutral = 'neutralToken.txt'
 
 def filterFile(fileRead, fileWrite, key):
     with open(fileWrite, 'w') as outFile:
@@ -37,5 +38,6 @@ def filterFile(fileRead, fileWrite, key):
 
 filterFile(fileR, fileWorry, "worry")
 filterFile(fileR, fileSadness, "sadness")
+filterFile(fileR, fileNeutral, "neutral")
 filterFile(fileR, fileSurprise, "surprise")
 filterFile(fileR, fileHappiness, "happiness")

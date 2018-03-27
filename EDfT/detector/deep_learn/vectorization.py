@@ -9,11 +9,13 @@ class Vectorizer:
 
     def __init__(self):
         self.hashTable = {}
+
         self.angryVectors = []
         self.disgustVectors = []
         self.joyVectors = []
         self.sadnessVectors = []
         self.surpriseVectors = []
+        self.neutralVectors = []
 
     def readLecixonDictionary(self):
         with open("detector/preprocessing/emotion_lexicon_dic.txt") as f:
@@ -21,6 +23,8 @@ class Vectorizer:
             for i in l:
                 l2 = i.split(' ',1)
                 l3 = l2[1].split()
+                self.hashTable[l2[0]] = []
+
                 self.hashTable[l2[0]].append(int(l3[0])) #anger
                 self.hashTable[l2[0]].append(int(l3[2])) #dusgust
                 self.hashTable[l2[0]].append(int(l3[4])) #joy
@@ -38,9 +42,21 @@ class Vectorizer:
                 sentenceVector = [2+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0]
             elif token == 1:
                 sentenceVector = [0.1+random.uniform(0.1,0.2),2+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),1]
-            #Add code for sadnessVectors and surpriseVectors here --
             else:
                 sentenceVector = [0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),2+random.uniform(0.1,0.2),2]
+        #Add code for sadnessVectors and surpriseVectors here --
+        # for i in sentenceTokens:
+        #     sentenceVector = []
+        #     if token == 0:
+        #         sentenceVector = [2+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0]
+        #     elif token == 1:
+        #         sentenceVector = [0.1+random.uniform(0.1,0.2),2+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),1]
+        #     elif token == 2:
+        #         sentenceVector = [0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),2+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),2]
+        #     elif token == 3:
+        #         sentenceVector = [0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),2+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),3]
+        #     elif token == 4:
+        #         sentenceVector = [0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),0.1+random.uniform(0.1,0.2),2+random.uniform(0.1,0.2),4]
 
             wordTokens = nltk.word_tokenize(i)
             stemmer = PorterStemmer()
@@ -54,7 +70,7 @@ class Vectorizer:
                     wordStem = stemmer.stem(jj)
                     if wordStem[-1] == 'i':  #The stemmer strangely change 'y' to 'i'. It's not usual in English
                         wordStem = list(wordStem)
-                        wordStem[-1] == 'y'
+                        wordStem[-1] = 'y'
                         wordStem = ''.join(wordStem)
                     if self.hashTable.has_key(wordStem):
                         for k in range(3):
@@ -93,9 +109,33 @@ class Vectorizer:
             if i < len(self.joyVectors):
                 vectorLengthMinusOne = len(self.joyVectors[i])-1
                 for j in range(vectorLengthMinusOne):
-                    f.write(str(self.disgustVectors[i][j]))
+                    f.write(str(self.joyVectors[i][j]))
                     f.write(',')
                 f.write(str(self.joyVectors[i][-1]+'\n'))
+            # if i < len(self.worryVectors):
+            #     vectorLengthMinusOne = len(self.worryVectors[i])-1
+            #     for j in range(vectorLengthMinusOne):
+            #         f.write(str(self.worryVectors[i][j]))
+            #         f.write(',')
+            #     f.write(str(self.worryVectors[i][-1]+'\n'))
+            # if i < len(self.sadnessVectors):
+            #     vectorLengthMinusOne = len(self.sadnessVectors[i])-1
+            #     for j in range(vectorLengthMinusOne):
+            #         f.write(str(self.sadnessVectors[i][j]))
+            #         f.write(',')
+            #     f.write(str(self.sadnessVectors[i][-1]+'\n'))
+            # if i < len(self.surpriseVectors):
+            #     vectorLengthMinusOne = len(self.surpriseVectors[i])-1
+            #     for j in range(vectorLengthMinusOne):
+            #         f.write(str(self.surpriseVectors[i][j]))
+            #         f.write(',')
+            #     f.write(str(self.surpriseVectors[i][-1]+'\n'))
+            # if i < len(self.neutralVectors):
+            #     vectorLengthMinusOne = len(self.neutralVectors[i])-1
+            #     for j in range(vectorLengthMinusOne):
+            #         f.write(str(self.neutralVectors[i][j]))
+            #         f.write(',')
+            #     f.write(str(self.neutralVectors[i][-1]+'\n'))
 
     def vectorize(self, sentences):
         listOfVectors = []
@@ -130,6 +170,9 @@ class Vectorizer:
             self.readTokenFile('detector/preprocessing/angryTokens.txt')
             self.readTokenFile('detector/preprocessing/disgustTokens.txt')
             self.readTokenFile('detector/preprocessing/joyTokens.txt')
+            # self.readTokenFile('detector/preprocessing/worryTokens.txt')
+            # self.readTokenFile('detector/preprocessing/sadnessTokens.txt')
+            # self.readTokenFile('detector/preprocessing/happinessTokens.txt')
 
             self.writeVectorsToFile()
         else:
