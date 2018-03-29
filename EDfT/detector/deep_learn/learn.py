@@ -13,16 +13,16 @@ class Trainer:
         tf_session = tf.Session()
         K.set_session(tf_session)
 
-        data_set = np.loadtxt("deep_learn/vectorization.csv")
+        data_set = np.loadtxt("detector/preprocessing/vectorization.csv", delimiter=",")
         data_size = len(data_set)
 
         # Change those according to your needs
-        test_data_size = 1000
+        test_data_size = 800
         num_features = 3 # or 5
 
         # Train Set
         in_vec = data_set[0:(data_size - test_data_size +1), 0:num_features]
-        out_vec = data_set[0:(data_set - test_data_size +1), num_features]
+        out_vec = data_set[0:(data_size - test_data_size +1), num_features]
         output_vec_categorical = to_categorical(out_vec)
 
         # Test Set
@@ -47,6 +47,7 @@ class Trainer:
 
         # Compile model with loss function for multi-class classification, with the adam algorithm for optimizing
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        model_configs = model.to_json()
 
 #=========================  Training The Model  ===============================#
         with tf_session.as_default():
@@ -54,8 +55,8 @@ class Trainer:
             model_weights = model.get_weights()
 
 #=========================  Saving model configs and weights  =================#
-        cf = open('configs','w')
-        cf.write(model_weights)
+        with open('configs','w') as cf:
+            cf.write(model_configs)
         model.save_weights('weights')
 
 #=========================  Evaluating Model  =================================#

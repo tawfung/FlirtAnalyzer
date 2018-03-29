@@ -9,10 +9,10 @@ class Classifier:
 
     def load_model(self):
         f = open('configs', 'r')
-        conf = f.readline()
+        cfg = f.read()
         f.close()
-        self.model = model_from_json(conf)
-        self.model.load_weights('weights')
+        self.model = model_from_json(cfg)  #TODO: create weights file first
+        self.model.load_weights('weights') 
         self.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         return self.model
 
@@ -28,10 +28,10 @@ class Classifier:
         with tf_session.as_default():
             for result in self.model.predict(np.array(vectors)):
                 print(result)
-                if (result[0] > result[1]) and (result[0] > result[2]):
+                if result[0] > result[1] and result[0] > result[2]:
                     predictions.append(0)
                     counters[0] += 1
-                elif (result[1] > result[0]) and (result[1] > result[2]):
+                elif result[1] > result[0] and result[1] > result[2]:
                     predictions.append(1)
                     counters[1] += 1
                 else:

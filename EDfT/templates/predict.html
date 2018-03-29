@@ -1,4 +1,4 @@
-{% load static %}
+<!-- {% load static %} -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,15 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Your Emotion</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
     <script type="text/javascript">
         window.onload = function() {
-            joy = Number({{emo0}}); //Joy
-            dis = Number({{emo1}}); //Disgust
-            ang = Number({{emo2}}); //Anger
-            hap = Number({{emo3}}); //Happy
-            sar = Number({{emo4}}); //Sarcasm
-            sad = Number({{emo5}}); //Sadness
+            joy = Number({{joy}}); //Joy
+            dis = Number({{disg}}); //Disgust
+            ang = Number({{angr}}); //Anger
+            // hap = Number({{happ}}); //Happy
+            // sar = Number({{sarc}}); //Sarcasm
+            // sad = Number({{sadn}}); //Sadness
             var chart = new CanvasJS.Chart("chartContainer",{
                 theme: "light1",
                 exportEnabled: true,
@@ -33,10 +33,10 @@
                     dataPoints: [
                         {y:joy, label:"Joy"},
                         {y:dis, label:"Disgust"},
-                        {y:ang, label:"Anger"},
-                        {y:hap, label:"Happy"},
-                        {y:sar, label:"Sarcasm"},
-                        {y:sad, label:"Sadness"}
+                        {y:ang, label:"Anger"}
+                        // {y:hap, label:"Happy"},
+                        // {y:sar, label:"Sarcasm"},
+                        // {y:sad, label:"Sadness"}
                     ]
 
                 }]
@@ -54,10 +54,10 @@
             // dPs.push({y:sad, label:'Sadness'});
             chart.render();
         }
-    </script>
+    </script> -->
 </head>
 <body>
-    <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
-    <script src="{% static 'js/canvasjs.min.js'%}"></script>
+    <!-- <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
+    <script src="{% static 'js/canvasjs.min.js'%}"></script> -->
 </body>
 </html>

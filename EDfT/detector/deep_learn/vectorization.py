@@ -13,11 +13,11 @@ class Vectorizer:
         self.angryVectors = []
         self.disgustVectors = []
         self.joyVectors = []
-        self.sadnessVectors = []
-        self.surpriseVectors = []
-        self.neutralVectors = []
+        # self.sadnessVectors = []
+        # self.surpriseVectors = []
+        # self.neutralVectors = []
 
-    def readLecixonDictionary(self):
+    def readLexiconDictionary(self):
         with open("detector/preprocessing/emotion_lexicon_dic.txt") as f:
             l = f.readlines()
             for i in l:
@@ -63,7 +63,7 @@ class Vectorizer:
 
             for j in wordTokens:
                 jj = j.lower()
-                if self.hashTable.has_key(jj):
+                if jj in self.hashTable:
                     for k in range(3):
                         sentenceVector[k] += self.hashTable[jj][k]
                 else:
@@ -72,7 +72,8 @@ class Vectorizer:
                         wordStem = list(wordStem)
                         wordStem[-1] = 'y'
                         wordStem = ''.join(wordStem)
-                    if self.hashTable.has_key(wordStem):
+                    # if self.hashTable.has_key(wordStem):
+                    if wordStem in self.hashTable:
                         for k in range(3):
                             sentenceVector[k] += self.hashTable[wordStem][k]
 
@@ -90,7 +91,7 @@ class Vectorizer:
             #     self.surpriseVectors.append(sentenceVector)
 
     def writeVectorsToFile(self):
-        f = open('detector/deep_learn/vectorization.csv','w')
+        f = open('detector/preprocessing/vectorization.csv','w')
         maximumSize = max(len(self.angryVectors), len(self.disgustVectors), len(self.joyVectors))
 
         for i in range(maximumSize):
@@ -143,11 +144,12 @@ class Vectorizer:
         for i in sentences:
             sentenceVector = [random.uniform(0.1,0.2),random.uniform(0.1,0.2),random.uniform(0.1,0.2)]
             wordTokens = nltk.word_tokenize(i)
-            stemmer = PorterStemmer();
+            stemmer = PorterStemmer()
 
             for j in wordTokens:
                 jj = j.lower()
-                if self.hashTable.has_key(jj):
+                # if self.hashTable.has_key(jj):
+                if jj in self.hashTable:
                     for k in range(3):
                         sentenceVector[k] += self.hashTable[jj][k]
                 else:
@@ -157,19 +159,20 @@ class Vectorizer:
                         wordStem[-1] == 'y'
                         wordStem = ''.join(wordStem)
 
-                    if self.hashTable.has_key(wordStem):
+                    # if self.hashTable.has_key(wordStem):
+                    if wordStem in self.hashTable:
                         for k in range(3):
                             sentenceVector[k] += self.hashTable[wordStem][k]
             listOfVectors.append(sentenceVector)
         return listOfVectors
 
     def start(self, mode='train', text=None):
-        self.readLecixonDictionary()
+        self.readLexiconDictionary()
 
         if mode == 'train':
-            self.readTokenFile('detector/preprocessing/angryTokens.txt')
-            self.readTokenFile('detector/preprocessing/disgustTokens.txt')
-            self.readTokenFile('detector/preprocessing/joyTokens.txt')
+            self.readTokenFile('detector/preprocessing/angryTokens.txt',0)
+            self.readTokenFile('detector/preprocessing/disgustTokens.txt',1)
+            self.readTokenFile('detector/preprocessing/joyTokens.txt',2)
             # self.readTokenFile('detector/preprocessing/worryTokens.txt')
             # self.readTokenFile('detector/preprocessing/sadnessTokens.txt')
             # self.readTokenFile('detector/preprocessing/happinessTokens.txt')
