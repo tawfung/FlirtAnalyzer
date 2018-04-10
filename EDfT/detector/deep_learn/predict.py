@@ -2,7 +2,7 @@ from keras.models import *
 import numpy as np
 import tensorflow as tf
 from keras import backend as K
-from nltk.stem import LancasterStemmer
+from nltk.stem import LancasterStemmer, PorterStemmer
 
 class Classifier:
     def __init__(self):
@@ -12,7 +12,7 @@ class Classifier:
         f = open('detector/deep_learn/configs', 'r')
         cfg = f.read()
         f.close()
-        self.model = model_from_json(cfg)  #TODO: create weights file first
+        self.model = model_from_json(cfg)
         self.model.load_weights('detector/deep_learn/weights')
         self.model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
         return self.model
@@ -33,10 +33,11 @@ class Classifier:
         # sentences = self.model.sent_tokenize(sentence)
 
         s = LancasterStemmer()
-        unwantedWords = ['the' , 'a', 'is' , 'was' , 'are',
-                          'were' , 'to', 'at', 'i' , 'my',
-                          'on' , 'me'  , 'of' , '.' , 'in' ,
-                          'that' , 'he' , 'she' , 'it' , 'by']
+        # s = PorterStemmer()
+        # unwantedWords = ['the' , 'a', 'is' , 'was' , 'are',
+        #                   'were' , 'to', 'at', 'i' , 'my',
+        #                   'on' , 'me'  , 'of' , '.' , 'in' ,
+        #                   'that' , 'he' , 'she' , 'it' , 'by']
         for i in range(0, a - 1):
             lex_dic[i][0] = s.stem(lex_dic[i][0])
 
@@ -46,9 +47,28 @@ class Classifier:
         X = dataset[:-1, :]
         predictions = self.model.predict(X)
         rounded = np.around(predictions, decimals=0)
-        counters = [0,0,0]
+        # counters = [0,0,0,0,0]
+        counters = [0, 0, 0]
         c = 1
 
+        # with tf_session.as_default():
+        #     for x in rounded:
+        #         if x[0] == 1 and x[1] == 0 and x[2] == 0 and x[3] == 0 and x[4] == 0:
+        #             counters[0] += 1
+        #             print("Sentence Number " + str(c) + " is Angry")
+        #         elif x[0] == 0 and x[1] == 1 and x[2] == 0 and x[3] == 0 and x[4] == 0:
+        #             counters[1] += 1
+        #             print("Sentence Number " + str(c) + " is Disgust")
+        #         elif x[0] == 0 and x[1] == 0 and x[2] == 1 and x[3] == 0 and x[4] == 0:
+        #             counters[2] += 1
+        #             print("Sentence Number " + str(c) + " is Joy")
+        #         elif x[0] == 0 and x[1] == 0 and x[2] == 0 and x[3] == 1 and x[4] == 0:
+        #             counters[3] += 1
+        #             print("Sentence Number " + str(c) + " is Sad")
+        #         elif x[0] == 0 and x[1] == 0 and x[2] == 0 and x[3] == 0 and x[4] == 1:
+        #             counters[4] += 1
+        #             print("Sentence Number " + str(c) + " is Shame")
+        #         c += 1
         with tf_session.as_default():
             for x in rounded:
                 if x[0] == 1 and x[1] == 0 and x[2] == 0:
@@ -60,6 +80,7 @@ class Classifier:
                 elif x[0] == 0 and x[1] == 0 and x[2] == 1:
                     counters[2] += 1
                     print("Sentence Number " + str(c) + " is Joy")
+
                 c += 1
 
         K.clear_session()

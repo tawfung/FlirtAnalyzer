@@ -14,7 +14,7 @@ import csv, re
 
 fileR = 'text_emotion.csv'
 fileWorry = 'worryToken.txt'
-fileSadness = 'sadnessToken.txt'
+fileSadness = 'sadnessTokens.txt'
 fileHappiness = 'happinessToken.txt'
 fileSurprise = 'surpriseToken.txt'
 fileNeutral = 'neutralToken.txt'

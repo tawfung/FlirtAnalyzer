@@ -15,7 +15,7 @@ class Trainer:
         K.set_session(tf_session)
 
         data_set = np.loadtxt("detector/deep_learn/vectorization.csv", delimiter=",")
-        data_size = len(data_set)
+        # data_size = len(data_set)
 
         # # Change those according to your needs
         # test_data_size = 800
@@ -39,7 +39,7 @@ class Trainer:
         test_out_vec = data_set[0:200, 10:]
         test_output_vec_categorical = to_categorical(test_out_vec)
 
-#========================  Model Configuration  ==============================#
+# ========================  Model Configuration  ==============================#
         # Stacking 3 layers, so choosing a sequential model
         model = Sequential()
         # The first layer has 3 inputs and 3 outputs
@@ -59,21 +59,21 @@ class Trainer:
 
         # Compile model with loss function for multi-class classification, with the adam algorithm for optimizing
         model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+        model_configs = model.to_json()
 
-#=========================  Training The Model  ===============================#
+# =========================  Training The Model  ===============================#
         with tf_session.as_default():
             model.fit(inp_vec, output_vec_categorical, nb_epoch=30, batch_size=10)
             # model_weights = model.get_weights()
 
 # =========================  Saving model configs and weights  =================#
-        model_configs = model.to_json()
         if not os.path.isfile('detector/deep_learn/configs'):
             open('detector/deep_learn/configs', 'w')
         with open('detector/deep_learn/configs', 'w') as cf:
             cf.write(model_configs)
         model.save_weights('detector/deep_learn/weights')
 
-#=========================  Evaluating Model  =================================#
+# =========================  Evaluating Model  =================================#
         scores = None
         with tf_session.as_default():
             scores = model.evaluate(test_in_vec,test_output_vec_categorical)
@@ -81,21 +81,5 @@ class Trainer:
 
         print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
         return scores[1]*100.0
-
-# #####################################
-#         # Train set
-#         X = data_set[:2900, 0:10]
-#         y_int = data_set[:2900, 10:]
-#         Y = to_categorical(y_int)
-#         # Test Set
-#         XTest = data_set[2900:, 0:10]
-#         ytest_int = data_set[2900:, 10:]
-#         yTest = to_categorical(ytest_int)
-#         # Fit the model
-#         model.fit(X, Y, nb_epoch=25, batch_size=10)
-#         # evaluate the model
-#         scores = model.evaluate(XTest, yTest)
-#         print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1] * 100))
-# #####################################
 
 

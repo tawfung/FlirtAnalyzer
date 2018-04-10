@@ -6,15 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Your Emotion</title>
-    <!-- <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
     <script type="text/javascript">
         window.onload = function() {
             joy = Number({{joy}}); //Joy
-            dis = Number({{disg}}); //Disgust
-            ang = Number({{angr}}); //Anger
-            // hap = Number({{happ}}); //Happy
-            // sar = Number({{sarc}}); //Sarcasm
-            // sad = Number({{sadn}}); //Sadness
+            dis = Number({{dis}}); //Disgust
+            ang = Number({{ang}}); //Anger
+            // hap = Number({{hap}}); //Happy
+            // sar = Number({{sar}}); //Sarcasm
+            {#sad = Number({{sad}}); //Sadness#}
+            {#sha = Number({{ sha }});  //Shame#}
             var chart = new CanvasJS.Chart("chartContainer",{
                 theme: "light1",
                 exportEnabled: true,
@@ -25,15 +26,17 @@
                 data: [{
                     type: "pie",
                     startAngle: 25,
-                    toolTipContent: "<b>{label}</b>: {y}%",
+                    toolTipContent: "<b>{label}</b>: {y} sentences",
                     showInLegend:"true",
                     legendText: "{label}",
                     indexLabelFontSize: 16,
-                    indexLabel: "{label}" - "{y}%",
+                    indexLabel: "{label}" - "{y}sentences",
                     dataPoints: [
-                        {y:joy, label:"Joy"},
+                        {y:ang, label:"Anger"},
                         {y:dis, label:"Disgust"},
-                        {y:ang, label:"Anger"}
+                        {y:joy, label:"Joy"},
+                        // {y:sad, label:"Sadness"},
+                        // {y:sha, label:"Shame"},
                         // {y:hap, label:"Happy"},
                         // {y:sar, label:"Sarcasm"},
                         // {y:sad, label:"Sadness"}
@@ -54,10 +57,10 @@
             // dPs.push({y:sad, label:'Sadness'});
             chart.render();
         }
-    </script> -->
+    </script>
 </head>
 <body>
-    <!-- <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
-    <script src="{% static 'js/canvasjs.min.js'%}"></script> -->
+    <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
+    <script src="{% static 'js/canvasjs.min.js'%}"></script>
 </body>
 </html>

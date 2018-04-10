@@ -5,19 +5,26 @@ from detector.deep_learn.learn import *
 from detector.deep_learn.predict import *
 from detector.deep_learn.vectorization import *
 
+
 # Create your views here.
 def index(request):
-    return render(request,"home.html")
+    return render(request, "home.html")
 
 def train(request):
     vectorizer = Vectorizer()
-    vectorizer.start(mode = 'train', text=None)
+    vectorizer.start(mode='train', text=None)
     trainer = Trainer()
-    acc = trainer.start()
+    accur = trainer.start()
+    return HttpResponse(accur)
 
-    return HttpResponse(acc)
+    pass
 
 def predict(request):
+    # vectorizer = Vectorizer()
+    # vectorizer.start(mode='train', text=None)
+    # trainer = Trainer()
+    # accur = trainer.start()
+
     if 'textfile' in request.POST and 'textfile' not in request.FILES and len(request.POST['sentences']) == 0:
         return HttpResponse("DATA NOT FOUND!")
     sentences = request.POST['sentences']
@@ -38,23 +45,14 @@ def predict(request):
     if len(all_sentences) == 0:
         return HttpResponse("DATA NOT FOUND!!!")
 
-    print ('seee', all_sentences)
+    print ('see', all_sentences)
     classifier = Classifier()
     result = classifier.start(all_sentences)
     # print(result)
 
-    return render(request, 'predict.html',{
-    # 'result': result,
-    #                                         'angr': result['counters'][0],
-    #                                         'disg': result['counters'][1],
-    #                                         'joy': result['counters'][2]})
-                                            # 'emo3': result['counters'][3],
-                                            # 'emo4': result['counters'][4],
-                                            # 'emo5': result['counters'][5]})
-    # return render(request, 'predict.html',{ 'emo0': 50,
-    #                                         'emo1': 20,
-    #                                         'emo2': 15,
-    #                                         'emo3': 10,
-    #                                         'emo4': 3,
-    #                                         'emo5': 2
-    })
+    return render(request, 'predict.html',{ 'result': result,
+                                            'ang': result['counters'][0],
+                                            'dis': result['counters'][1],
+                                            'joy': result['counters'][2],   })
+                                            # 'sad': result['counters'][3],
+                                            # 'sha': result['counters'][4],  })
