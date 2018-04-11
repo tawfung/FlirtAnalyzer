@@ -32,8 +32,8 @@ class Classifier:
         #     sentence = f.read()
         # sentences = self.model.sent_tokenize(sentence)
 
-        s = LancasterStemmer()
-        # s = PorterStemmer()
+        # s = LancasterStemmer()
+        s = PorterStemmer()
         # unwantedWords = ['the' , 'a', 'is' , 'was' , 'are',
         #                   'were' , 'to', 'at', 'i' , 'my',
         #                   'on' , 'me'  , 'of' , '.' , 'in' ,

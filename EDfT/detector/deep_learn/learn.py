@@ -42,14 +42,11 @@ class Trainer:
 # ========================  Model Configuration  ==============================#
         # Stacking 3 layers, so choosing a sequential model
         model = Sequential()
-        # The first layer has 3 inputs and 3 outputs
-        # inp_layer = Dense(3, init='uniform', activation='relu', input_dim=3)
+        # The first layer has 10 inputs and 100 outputs
         inp_layer = Dense(output_dim=100, init='uniform', activation='relu', input_dim=10)
-        # The second hidden layer has 3 outputs as well
-        # hid_layer = Dense(3, init='uniform', activation='relu')
+        # The second hidden layer has 100 inputs and outputs as well
         hid_layer = Dense(output_dim=100, init='uniform', activation='relu', input_dim=100)
         # The third output layer has 3 outputs between [0, 1], that's why a sigmoid activation function was used
-        # out_layer = Dense(3, init='uniform', activation='sigmoid')
         out_layer = Dense(output_dim=3, init='uniform', activation='softmax', input_dim=100)
 
         # Adding the layer to the model

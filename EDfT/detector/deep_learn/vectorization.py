@@ -85,7 +85,8 @@ class Vectorizer:
 
 
     def processTokenFile(self):
-        stemmer = LancasterStemmer()
+        # stemmer = LancasterStemmer()
+        stemmer = PorterStemmer()
         with open("detector/deep_learn/emotion_lexicon_dic.txt", 'r') as f:
             lex_dic = f.read()
         lex_dic = lex_dic.split("\n")
@@ -116,13 +117,17 @@ class Vectorizer:
         for x in angryTokens:
             featureVector = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 10 dimensions
             words = word_tokenize(x)
-            for y in words:
-                y = stemmer.stem(y)
-                y = y.lower()
-                if y in unwantedWords != -1:
+            for word in words:
+                word = stemmer.stem(word)
+                word = word.lower()
+                if word in unwantedWords != -1:
                     continue
+                elif word[-1] == 'i':
+                    word = list(word)
+                    word[-1] = 'y'
+                    word = ''.join(word)
                 for i in range(0, a - 1):
-                    if y == lex_dic[i][0]:
+                    if word == lex_dic[i][0]:
                         for j in range(0, 10):
                             featureVector[j] = featureVector[j] + int(lex_dic[i][j + 1])
                         break
@@ -143,13 +148,17 @@ class Vectorizer:
         for x in disgustTokens:
             featureVector = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 10 dimensions
             words = word_tokenize(x)
-            for y in words:
-                y = stemmer.stem(y)
-                y = y.lower()
-                if y in unwantedWords != -1:
+            for word in words:
+                word = stemmer.stem(word)
+                word = word.lower()
+                if word in unwantedWords != -1:
                     continue
+                elif word[-1] == 'i':
+                    word = list(word)
+                    word[-1] = 'y'
+                    word = ''.join(word)
                 for i in range(0, a - 1):
-                    if y == lex_dic[i][0]:
+                    if word == lex_dic[i][0]:
                         for j in range(0, 10):
                             featureVector[j] = featureVector[j] + int(lex_dic[i][j + 1])
                         break
@@ -170,13 +179,17 @@ class Vectorizer:
         for x in joyTokens:
             featureVector = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 10 dimensions
             words = word_tokenize(x)
-            for y in words:
-                y = stemmer.stem(y)
-                y = y.lower()
-                if y in unwantedWords != -1:
+            for word in words:
+                word = stemmer.stem(word)
+                word = word.lower()
+                if word in unwantedWords != -1:
                     continue
+                elif word[-1] == 'i':
+                    word = list(word)
+                    word[-1] = 'y'
+                    word = ''.join(word)
                 for i in range(0, a - 1):
-                    if y == lex_dic[i][0]:
+                    if word == lex_dic[i][0]:
                         for j in range(0, 10):
                             featureVector[j] = featureVector[j] + int(lex_dic[i][j + 1])
                         break
@@ -203,7 +216,8 @@ class Vectorizer:
                 vectorsFile.write(features[3117 - i] + '\n')
 
     def vectorize(self, sentences):
-        s = LancasterStemmer()
+        # s = LancasterStemmer()
+        s = PorterStemmer()
         with open("detector/deep_learn/emotion_lexicon_dic.txt", 'r') as f:
             lex_dic = f.read()
         lex_dic = lex_dic.split("\n")
@@ -227,13 +241,17 @@ class Vectorizer:
         for x in sentences:
             featureVector = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             words = word_tokenize(x)
-            for y in words:
-                y = s.stem(y)
-                y = y.lower()
-                if y in unwantedWords != -1:
+            for word in words:
+                word = s.stem(word)
+                word = word.lower()
+                if word in unwantedWords != -1:
                     continue
+                elif word[-1] == 'i':
+                    word = list(word)
+                    word[-1] = 'y'
+                    word = ''.join(word)
                 for i in range(0, a - 1):
-                    if y == lex_dic[i][0]:
+                    if word == lex_dic[i][0]:
                         for j in range(0, 10):
                             featureVector[j] = featureVector[j] + int (lex_dic[i][j + 1])
                         break
