@@ -46,7 +46,7 @@ class Trainer:
         inp_layer = Dense(output_dim=100, init='uniform', activation='relu', input_dim=10)
         # The second hidden layer has 100 inputs and outputs as well
         hid_layer = Dense(output_dim=100, init='uniform', activation='relu', input_dim=100)
-        # The third output layer has 3 outputs between [0, 1], that's why a sigmoid activation function was used
+        # The third output layer has 3 outputs, that's why a softmax activation function was used
         out_layer = Dense(output_dim=3, init='uniform', activation='softmax', input_dim=100)
 
         # Adding the layer to the model
@@ -71,9 +71,9 @@ class Trainer:
         model.save_weights('detector/deep_learn/weights')
 
 # =========================  Evaluating Model  =================================#
-        scores = None
+#         scores = None
         with tf_session.as_default():
-            scores = model.evaluate(test_in_vec,test_output_vec_categorical)
+            scores = model.evaluate(test_in_vec, test_output_vec_categorical)
         K.clear_session()
 
         print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))

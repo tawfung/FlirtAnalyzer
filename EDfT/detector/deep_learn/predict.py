@@ -2,7 +2,7 @@ from keras.models import *
 import numpy as np
 import tensorflow as tf
 from keras import backend as K
-from nltk.stem import LancasterStemmer, PorterStemmer
+from nltk.stem import *
 
 class Classifier:
     def __init__(self):
@@ -93,4 +93,4 @@ class Classifier:
         results['total'] = total
         return results
 
-        print (results)
+        print(results)

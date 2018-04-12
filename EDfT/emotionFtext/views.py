@@ -1,4 +1,3 @@
-from numpy import array
 from django.shortcuts import render
 from django.http import HttpResponse
 from detector.deep_learn.learn import *
@@ -45,14 +44,14 @@ def predict(request):
     if len(all_sentences) == 0:
         return HttpResponse("DATA NOT FOUND!!!")
 
-    print ('see', all_sentences)
+    print('see', all_sentences)
     classifier = Classifier()
     result = classifier.start(all_sentences)
     # print(result)
 
-    return render(request, 'predict.html',{ 'result': result,
+    return render(request, 'predict.html', {'result': result,
                                             'ang': result['counters'][0],
                                             'dis': result['counters'][1],
-                                            'joy': result['counters'][2],   })
+                                            'joy': result['counters'][2], })
                                             # 'sad': result['counters'][3],
-                                            # 'sha': result['counters'][4],  })
+                                            # 'sha': result['counters'][4],})

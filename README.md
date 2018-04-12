@@ -1,41 +1,38 @@
 # FlirtAnalyzer
-This project is my senior project and I build it for my best friend because her flirting skill was become an instinct.
+This project is my senior project and I build it for my best friend because her flirting skill became an instinct.
 
 ## Libraries and tools:
 
-#### pandas
+##### nltk
 
-#### nltk
+##### django
 
-#### numpy
+##### keras
 
-#### scikit-learn
+##### tensorflow
 
-#### django
-
-#### keras
-
-#### tensorflow
+##### numpy
 
 ## Installation:
 
-In terminal:
+* #### Ubuntu:
 
-+ Install virtual environment:
-```
-pip install virtualenv venv
-```
+    + Install virtual environment:
+        ```
+        pip install virtualenv venv
+        ```
 
-+ Activating virtual environment:
-```
-source venv/bin/activate
-```
+    + Activating virtual environment:
+        ```
+        source venv/bin/activate
+        ```
 
-+ Install libs:
-```
-pip install numpy scikit-learn django nltk pandas keras tensorflow==1.5 h5py
-```
-+ Run:
-    - Switch to app folder: ```cd EDfT```
-    - Run app: ```python manager.py runserver```
-    -> Open firefox and type this address to enjoy: [localhost:8000/](http://localhost:8000/)
+    + Install libs:
+        ```
+        pip install numpy scikit-learn django nltk keras tensorflow==1.5 h5py
+        ```
+    + Run:
+        - Switch to app folder: ```cd EDfT```
+        - Run app: ```python manager.py runserver```
+        
+        => Open browser(firefox) and type this address to enjoy: [localhost:8000/](http://localhost:8000/)
