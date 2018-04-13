@@ -1,0 +1,22 @@
+Update apt chuẩn bị cho quá trình cài đặt.
+
+$ sudo apt-get update
+$ sudo apt-get install apt-transport-https ca-certificates
+$ sudo apt-key adv --keyserver hkp://p80.pool.sks-keyservers.net:80 \
+--recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+
+
+Sửa file /etc/apt/source.list.d/docker.list với nội dung như sau.
+
+deb https://apt.dockerproject.org/repo ubuntu-trusty main
+
+
+Update danh sách package và xóa các phiên bản cũ
+
+$ sudo apt-get update
+$ sudo apt-get purge lxc-docker
+
+
+Cài đặt Docker
+
+$ sudo apt-get install docker-engine

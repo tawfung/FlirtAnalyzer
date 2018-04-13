@@ -1,6 +1,10 @@
 # FlirtAnalyzer
 This project is my senior project and I build it for my best friend because her flirting skill became an instinct.
 
+Version 1: Focus on detect emotion from text. 
+
+Version 2: Analyse deep text. (When I start? I don't know. :D) 
+
 ## Libraries and tools:
 
 ##### nltk

@@ -1,0 +1,10 @@
+Django
+psycopg2
+keras
+tenserflow==1.5
+h5py
+numpy
+scipy
+sklearn
+nltk
+
