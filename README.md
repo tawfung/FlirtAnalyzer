@@ -23,7 +23,9 @@ Version 2: Analyse deep text. (When I start? I don't know. :D)
 
     + Install virtual environment:
         ```
-        pip install virtualenv venv
+        pip install virtualenv
+         
+        virtualenv venv
         ```
 
     + Activating virtual environment:
