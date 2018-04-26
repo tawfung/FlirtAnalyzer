@@ -3,6 +3,7 @@ from django.http import HttpResponse
 from detector.deep_learn.learn import *
 from detector.deep_learn.predict import *
 from detector.deep_learn.vectorization import *
+from detector.deep_learn.statistical import *
 
 
 # Create your views here.
@@ -19,10 +20,6 @@ def train(request):
     pass
 
 def predict(request):
-    # vectorizer = Vectorizer()
-    # vectorizer.start(mode='train', text=None)
-    # trainer = Trainer()
-    # accur = trainer.start()
 
     if 'textfile' in request.POST and 'textfile' not in request.FILES and len(request.POST['sentences']) == 0:
         return HttpResponse("DATA NOT FOUND!")
@@ -56,3 +53,15 @@ def predict(request):
                                             'joy': result['counters'][2], })
                                             # 'sad': result['counters'][3],
                                             # 'sha': result['counters'][4],})
+def statistical(request):
+    statistics = Statistical()
+    goal = statistics.stat()
+    return render(request, "statistical.html",)
+
+                                                # {'goal': goal,
+                                                # 'day': goal['counters'][0],
+                                                # 'total': goal['counters'][1],
+                                                # 'ang': goal['counters'][2],
+                                                # 'dis': goal['counters'][3],
+                                                # 'joy': goal['counters'][4],
+                                                # 'und': goal['counters'][5],  }

@@ -1,0 +1,90 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Your Emotion</title>
+        <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
+        <script type="text/javascript">
+        window.onload = function () {
+            var dataPoints = [];
+            function getDataPointsFromCSV(csv, field) {
+                var dataPoints = csvLines = points = [];
+                csvLines = csv.split(/[\r?\n|\r|\n]+/);
+                for (var i = csvLines.length-5; i < csvLines.length; i++)
+                    if (csvLines[i].length > 0) {
+                        points = csvLines[i].split(",");
+                        dataPoints.push({
+                            x: parseFloat(points[0]),
+                            y: parseFloat(points[field]),
+                        });
+                    }
+                return dataPoints;
+            }
+
+            $.get("detector/deep_learn/stat-log.csv", function (data) {
+                var chart = new CanvasJS.Chart("chartContainer", {
+                    animationEnabled: true,
+                    title:{
+                        text: "Daily Emotions Statistic"
+                    },
+                    axisX: {
+                        {#valueFormatString:#}
+                    },
+                    axisY: {
+                        title: "Sentences",
+                        includeZero: false,
+                        suffix: " sentences"
+                    },
+                    legend:{
+                        cursor: "pointer",
+                        fontSize: 16,
+                        itemclick: toggleDataSeries
+                    },
+                    toolTip:{
+                        shared: true
+                    },
+                    data: [{
+                        name: "Anger",
+                        type: "spline",
+                        yValueFormatString: "#0.## sentences",
+                        showInLegend: true,
+                        dataPoints: getDataPointsFromCSV(data,2)
+                    },
+                    {
+                        name: "Disgust",
+                        type: "spline",
+                        yValueFormatString: "#0.## sentences",
+                        showInLegend: true,
+                        dataPoints: getDataPointsFromCSV(data,3)
+                    },
+                    {
+                        name: "Joy",
+                        type: "spline",
+                        yValueFormatString: "#0.## sentences",
+                        showInLegend: true,
+                        dataPoints: getDataPointsFromCSV(data,4)
+                    }]
+                });
+                chart.render();
+
+                function toggleDataSeries(e){
+                    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                        e.dataSeries.visible = false;
+                    }
+                    else{
+                        e.dataSeries.visible = true;
+                    }
+                    chart.render();
+                }
+            })
+        }
+        </script>
+    </head>
+    <body>
+        <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
+        <script src="{% static 'js/canvasjs.min.js'%}"></script>
+    </body>
+</html>

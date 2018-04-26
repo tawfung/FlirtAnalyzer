@@ -3,6 +3,7 @@ import numpy as np
 import tensorflow as tf
 from keras import backend as K
 from nltk.stem import *
+import datetime
 
 class Classifier:
     def __init__(self):
@@ -21,7 +22,7 @@ class Classifier:
         tf_session = tf.Session()
         K.set_session(tf_session)
 
-        with open('detector/deep_learn/emotion_lexicon_dic.txt','r') as f:
+        with open('detector/deep_learn/emotion_lexicon_dic.txt', 'r') as f:
             lex_dic = f.read()
         lex_dic = lex_dic.split('\n')
         a = 0
@@ -47,6 +48,7 @@ class Classifier:
         X = dataset[:-1, :]
         predictions = self.model.predict(X)
         rounded = np.around(predictions, decimals=0)
+        total = len(predictions)
         # counters = [0,0,0,0,0]
         counters = [0, 0, 0]
         c = 1
@@ -69,28 +71,33 @@ class Classifier:
         #             counters[4] += 1
         #             print("Sentence Number " + str(c) + " is Shame")
         #         c += 1
-        with tf_session.as_default():
-            for x in rounded:
-                if x[0] == 1 and x[1] == 0 and x[2] == 0:
-                    counters[0] += 1
-                    print("Sentence Number " + str(c) + " is Angry")
-                elif x[0] == 0 and x[1] == 1 and x[2] == 0:
-                    counters[1] += 1
-                    print("Sentence Number " + str(c) + " is Disgust")
-                elif x[0] == 0 and x[1] == 0 and x[2] == 1:
-                    counters[2] += 1
-                    print("Sentence Number " + str(c) + " is Joy")
+        with open('detector/deep_learn/daily-log.csv', 'a') as daily:
 
-                c += 1
+            with tf_session.as_default():
+                for x in rounded:
+                    if x[0] == 1 and x[1] == 0 and x[2] == 0:
+                        counters[0] += 1
+                        print("Sentence Number " + str(c) + " is Angry")
+                        # daily.write('\nSentence number ' + str(c) + ' is Angry. ')
+                    elif x[0] == 0 and x[1] == 1 and x[2] == 0:
+                        counters[1] += 1
+                        print("Sentence Number " + str(c) + " is Disgust")
+                        # daily.write('\nSentence number ' + str(c) + ' is Disgust.')
+                    elif x[0] == 0 and x[1] == 0 and x[2] == 1:
+                        counters[2] += 1
+                        print("Sentence Number " + str(c) + " is Joy")
+                        # daily.write('\nSentence number ' + str(c) + ' is Joy. ')
+                    c += 1
+                # return c
+                # print(c)
+            K.clear_session()
 
-        K.clear_session()
-
-        total = len(predictions)
+            daily.write(str(datetime.datetime.now()) + ',' + str(total) + ',' + str(counters[0]) + ','
+                        + str(counters[1]) + ',' + str(counters[2]) + ',' + str(total-(counters[0]+counters[1]+counters[2])) + '\n')
 
         results = dict()
         results['predictions'] = predictions
         results['counters'] = counters
         results['total'] = total
-        return results
 
-        print(results)
+        return results

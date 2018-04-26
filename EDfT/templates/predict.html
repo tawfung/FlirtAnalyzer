@@ -58,9 +58,22 @@
             chart.render();
         }
     </script>
+{#    <script>#}
+{#        function goBack() {#}
+{#            window.history.back()#}
+{#        }#}
+{#    </script>#}
 </head>
 <body>
     <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
     <script src="{% static 'js/canvasjs.min.js'%}"></script>
+
+    <form name="mainform" action="statistical/" class="form" method="POST" enctype="multipart/form-data">
+        {%csrf_token%}
+
+        <input type="button" value="Go back!" onclick="history.back()" class="left">
+
+        <input type="submit" value="Statistic!" id="statistical" name="statistical" class="btn btn-success pull-right">
+    </form>
 </body>
 </html>

@@ -234,7 +234,7 @@ class Vectorizer:
                          'on', 'me', 'of', '.', 'in',
                          'that', 'he', 'she', 'it', 'by']
         if not os.path.isfile('detector/deep_learn/featureVectorForSentence.csv'):
-            open('detector/deep_learn/featureVectorForSentence.csv' , 'w')
+            open('detector/deep_learn/featureVectorForSentence.csv', 'w')
         with open('detector/deep_learn/featureVectorForSentence.csv', 'w') as featuresFile:
             featuresFile.write('')
 
@@ -253,7 +253,7 @@ class Vectorizer:
                 for i in range(0, a - 1):
                     if word == lex_dic[i][0]:
                         for j in range(0, 10):
-                            featureVector[j] = featureVector[j] + int (lex_dic[i][j + 1])
+                            featureVector[j] = featureVector[j] + int(lex_dic[i][j + 1])
                         break
             # write this feature vector to featureVectors File
             for k in range(0, 9):

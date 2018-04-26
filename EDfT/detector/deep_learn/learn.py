@@ -60,7 +60,7 @@ class Trainer:
 
 # =========================  Training The Model  ===============================#
         with tf_session.as_default():
-            model.fit(inp_vec, output_vec_categorical, nb_epoch=10000, batch_size=10)
+            model.fit(inp_vec, output_vec_categorical, nb_epoch=1000, batch_size=10)
             # model_weights = model.get_weights()
 
 # =========================  Saving model configs and weights  =================#
