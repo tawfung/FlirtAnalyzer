@@ -141,11 +141,11 @@ class Vectorizer:
                 vectorsFile.write(str(featureVector[10]) + '\n')
 
         # Tokenize disgustTokens.txt file
-        with open('detector/deep_learn/disgustTokens.txt', 'r') as f:
-            disgust = f.read()
-        disgustTokens = sent_tokenize(disgust)
+        with open('detector/deep_learn/sadnessTokens.txt', 'r') as f:
+            sad = f.read()
+        sadTokens = sent_tokenize(sad)
 
-        for x in disgustTokens:
+        for x in sadTokens:
             featureVector = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]  # 10 dimensions
             words = word_tokenize(x)
             for word in words:

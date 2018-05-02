@@ -10,11 +10,10 @@
     <script type="text/javascript">
         window.onload = function() {
             joy = Number({{joy}}); //Joy
-            dis = Number({{dis}}); //Disgust
+            sad = Number({{sad}}); //Sadness
             ang = Number({{ang}}); //Anger
             // hap = Number({{hap}}); //Happy
             // sar = Number({{sar}}); //Sarcasm
-            {#sad = Number({{sad}}); //Sadness#}
             {#sha = Number({{ sha }});  //Shame#}
             var chart = new CanvasJS.Chart("chartContainer",{
                 theme: "light1",
@@ -33,28 +32,17 @@
                     indexLabel: "{label}" - "{y}sentences",
                     dataPoints: [
                         {y:ang, label:"Anger"},
-                        {y:dis, label:"Disgust"},
+                        {y:sad, label:"Sadness"},
                         {y:joy, label:"Joy"},
-                        // {y:sad, label:"Sadness"},
+
                         // {y:sha, label:"Shame"},
                         // {y:hap, label:"Happy"},
                         // {y:sar, label:"Sarcasm"},
-                        // {y:sad, label:"Sadness"}
                     ]
 
                 }]
             });
-            // dPs.push({y:joy, label:'Joy'});
-            // chart.render();
-            // dPs.push({y:dis, label:'Disgust'});
-            // chart.render();
-            // dPs.push({y:ang, label:'Anger'});
-            // chart.render();
-            // dPs.push({y:hap, label:'Happy'});
-            // chart.render();
-            // dPs.push({y:sar, label:'Sarcasm'});
-            // chart.render();
-            // dPs.push({y:sad, label:'Sadness'});
+
             chart.render();
         }
     </script>

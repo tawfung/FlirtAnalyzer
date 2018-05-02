@@ -49,7 +49,7 @@ def predict(request):
 
     return render(request, 'predict.html', {'result': result,
                                             'ang': result['counters'][0],
-                                            'dis': result['counters'][1],
+                                            'sad': result['counters'][1],
                                             'joy': result['counters'][2], })
                                             # 'sad': result['counters'][3],
                                             # 'sha': result['counters'][4],})
@@ -57,7 +57,7 @@ def statistical(request):
     statistics = Statistical()
     goal = statistics.stat()
     return render(request, "statistical.html",)
-
+    # return HttpResponse(goal)
                                                 # {'goal': goal,
                                                 # 'day': goal['counters'][0],
                                                 # 'total': goal['counters'][1],

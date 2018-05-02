@@ -29,9 +29,6 @@ class Classifier:
         for x in lex_dic:
             lex_dic[a] = x.split(' ')
             a += 1
-        # with open('test.txt','r') as f:
-        #     sentence = f.read()
-        # sentences = self.model.sent_tokenize(sentence)
 
         # s = LancasterStemmer()
         s = PorterStemmer()
@@ -49,28 +46,10 @@ class Classifier:
         predictions = self.model.predict(X)
         rounded = np.around(predictions, decimals=0)
         total = len(predictions)
-        # counters = [0,0,0,0,0]
         counters = [0, 0, 0]
         c = 1
 
-        # with tf_session.as_default():
-        #     for x in rounded:
-        #         if x[0] == 1 and x[1] == 0 and x[2] == 0 and x[3] == 0 and x[4] == 0:
-        #             counters[0] += 1
-        #             print("Sentence Number " + str(c) + " is Angry")
-        #         elif x[0] == 0 and x[1] == 1 and x[2] == 0 and x[3] == 0 and x[4] == 0:
-        #             counters[1] += 1
-        #             print("Sentence Number " + str(c) + " is Disgust")
-        #         elif x[0] == 0 and x[1] == 0 and x[2] == 1 and x[3] == 0 and x[4] == 0:
-        #             counters[2] += 1
-        #             print("Sentence Number " + str(c) + " is Joy")
-        #         elif x[0] == 0 and x[1] == 0 and x[2] == 0 and x[3] == 1 and x[4] == 0:
-        #             counters[3] += 1
-        #             print("Sentence Number " + str(c) + " is Sad")
-        #         elif x[0] == 0 and x[1] == 0 and x[2] == 0 and x[3] == 0 and x[4] == 1:
-        #             counters[4] += 1
-        #             print("Sentence Number " + str(c) + " is Shame")
-        #         c += 1
+
         with open('detector/deep_learn/daily-log.csv', 'a') as daily:
 
             with tf_session.as_default():
@@ -78,18 +57,13 @@ class Classifier:
                     if x[0] == 1 and x[1] == 0 and x[2] == 0:
                         counters[0] += 1
                         print("Sentence Number " + str(c) + " is Angry")
-                        # daily.write('\nSentence number ' + str(c) + ' is Angry. ')
                     elif x[0] == 0 and x[1] == 1 and x[2] == 0:
                         counters[1] += 1
-                        print("Sentence Number " + str(c) + " is Disgust")
-                        # daily.write('\nSentence number ' + str(c) + ' is Disgust.')
+                        print("Sentence Number " + str(c) + " is Sad")
                     elif x[0] == 0 and x[1] == 0 and x[2] == 1:
                         counters[2] += 1
                         print("Sentence Number " + str(c) + " is Joy")
-                        # daily.write('\nSentence number ' + str(c) + ' is Joy. ')
                     c += 1
-                # return c
-                # print(c)
             K.clear_session()
 
             daily.write(str(datetime.datetime.now()) + ',' + str(total) + ',' + str(counters[0]) + ','
