@@ -51,17 +51,8 @@ def predict(request):
                                             'ang': result['counters'][0],
                                             'sad': result['counters'][1],
                                             'joy': result['counters'][2], })
-                                            # 'sad': result['counters'][3],
-                                            # 'sha': result['counters'][4],})
+
 def statistical(request):
     statistics = Statistical()
     goal = statistics.stat()
     return render(request, "statistical.html",)
-    # return HttpResponse(goal)
-                                                # {'goal': goal,
-                                                # 'day': goal['counters'][0],
-                                                # 'total': goal['counters'][1],
-                                                # 'ang': goal['counters'][2],
-                                                # 'dis': goal['counters'][3],
-                                                # 'joy': goal['counters'][4],
-                                                # 'und': goal['counters'][5],  }

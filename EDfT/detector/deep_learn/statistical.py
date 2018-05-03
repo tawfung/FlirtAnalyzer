@@ -8,8 +8,8 @@ class Statistical:
         pass
     def stat(self):
         data = pd.read_csv('detector/deep_learn/daily-log.csv')
-        dat = pd.read_csv('detector/deep_learn/stat-log.csv')
-        with open('detector/deep_learn/stat-log.csv', 'a') as stat:
+        dat = pd.read_csv('static/stat-log.csv')
+        with open('static/stat-log.csv', 'a') as stat:
             counters = [0, 0, 0, 0, 0, 0]
             now = dt.date(dt.now())
 
@@ -23,7 +23,7 @@ class Statistical:
                 if dt.date(parser.parse((data["time"][i]))) == last_day:
                     counters[1] += int(data.loc[i:i, "total"])
                     counters[2] += int(data.loc[i:i, "anger"])
-                    counters[3] += int(data.loc[i:i, "disgust"])
+                    counters[3] += int(data.loc[i:i, "sadness"])
                     counters[4] += int(data.loc[i:i, "joy"])
                     counters[5] += int(data.loc[i:i, "undefined"])
 

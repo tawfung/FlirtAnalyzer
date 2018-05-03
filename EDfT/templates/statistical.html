@@ -7,99 +7,95 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Your Emotion</title>
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css'%}">
-        <script src="{% static 'js/jquery-1.11.1.min.js'%}"></script>
-        <script src="{% static 'js/papaparse.js'%}"></script>
-        <script src="{% static 'js/jquery.canvasjs.min.js'%}"></script>
-        <script src="{% static 'js/canvasjs.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery-1.11.1.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/jquery.canvasjs.min.js'%}"></script>
+        <script type="text/javascript" src="{% static 'js/canvasjs.min.js'%}"></script>
         <script type="text/javascript">
-            window.onload = function () {
-
+            //window.onload = function () {
+            $(document).ready(function (){
                 var dataPoints = [];
                 function getDataPointsFromCSV(csv, field) {
                     var dataPoints = csvLines = points = [];
-                    // csvLines = csv.split(/[\r?\n|\r|\n]+/);
+                    csvLines = csv.split(/[\r?\n|\r|\n]+/);
 
-                    csvLines = csv.split("\n");
                     for (var i = (csvLines.length - 6); i < csvLines.length; i++)
                         if (csvLines[i].length > 0) {
                             points = csvLines[i].split(",");
                             dataPoints.push({
-                                x: String(points[0]),
+                                x: new Date(points[0]),
                                 y: parseFloat(points[field]),
                             });
                         }
                     return dataPoints;
                 }
 
-                $.get("file:///home/enclaveit/SeniorProject/FlirtAnalyzer/EDfT/detector/deep_learn/stat-log.csv"), function (data) {
-                    var chart = new CanvasJS.Chart("chartContainer", {
-                        animationEnabled: true,
-                        title:{
-                            text: "Daily Emotions Statistic"
-                        },
-                        axisX: {
-                            valueFormatString: "####-##-##",
-                        },
-                        axisY: {
-                            title: "Sentences",
-                            includeZero: false,
-                            suffix: " sentences"
-                        },
-                        legend:{
-                            cursor: "pointer",
-                            fontSize: 16,
-                            itemclick: toggleDataSeries
-                        },
-                        toolTip:{
-                            shared: true
-                        },
-                        data: [{
-                            name: "Anger",
-                            type: "spline",
-                            yValueFormatString: "##### sentences",
-                            showInLegend: true,
-                            dataPoints: getDataPointsFromCSV(data,2)
-                        },
-                        {
-                            name: "Sad",
-                            type: "spline",
-                            yValueFormatString: "##### sentences",
-                            showInLegend: true,
-                            dataPoints: getDataPointsFromCSV(data,3)
-                        },
-                        {
-                            name: "Joy",
-                            type: "spline",
-                            yValueFormatString: "##### sentences",
-                            showInLegend: true,
-                            dataPoints: getDataPointsFromCSV(data,4)
-                        }]
-                    });
-                    chart.render();
-
-                    function toggleDataSeries(e){
-                        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                            e.dataSeries.visible = false;
-                        }
-                        else{
-                            e.dataSeries.visible = true;
-                        }
+                $.ajax({
+                    type: "GET",
+                    url: "{% static 'stat-log.csv'%}",
+                    dataType: "text",
+                    success: function (data) {
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            animationEnabled: true,
+                            title: {
+                                text: "Daily Emotions Statistic"
+                            },
+                            axisX: {
+                                title: "Days",
+                            },
+                            axisY: {
+                                title: "Sentences",
+                                includeZero: false,
+                                suffix: " sentences"
+                            },
+                            legend: {
+                                cursor: "pointer",
+                                fontSize: 16,
+                                itemclick: toggleDataSeries
+                            },
+                            toolTip: {
+                                shared: true
+                            },
+                            data: [{
+                                    name: "Anger",
+                                    type: "spline",
+                                    yValueFormatString: "##### sentences",
+                                    showInLegend: true,
+                                    dataPoints: getDataPointsFromCSV(data, 2)
+                                },
+                                {
+                                    name: "Sad",
+                                    type: "spline",
+                                    yValueFormatString: "##### sentences",
+                                    showInLegend: true,
+                                    dataPoints: getDataPointsFromCSV(data, 3)
+                                },
+                                {
+                                    name: "Joy",
+                                    type: "spline",
+                                    yValueFormatString: "##### sentences",
+                                    showInLegend: true,
+                                    dataPoints: getDataPointsFromCSV(data, 4)
+                                }]
+                        });
                         chart.render();
+
+                        function toggleDataSeries(e) {
+                            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                                e.dataSeries.visible = false;
+                            }
+                            else {
+                                e.dataSeries.visible = true;
+                            }
+                            chart.render();
+                        }
                     }
-                }
-            }
+                });
+            });
         </script>
     </head>
     <body>
-        <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
-{#        <div id="page-wrapper">#}
-{##}
-{#		<h1>Text File Reader</h1>#}
-{#		<div>#}
-{#			Select a text file:#}
-{#			<input type="file" id="fileInput">#}
-{#		</div>#}
-{#		<pre id="fileDisplayArea"><pre>#}
+
+        <div id="chartContainer" style="height: 500px; max-width: 100%; margin: 0px auto;"></div>
 
 	</div>
     </body>
