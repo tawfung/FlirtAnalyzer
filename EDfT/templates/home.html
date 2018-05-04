@@ -12,6 +12,9 @@
   </head>
   <body>
       <h1 align = "center" style="color:blueviolet"> This is an Emotion Detector from Text </h1>
+
+      <img class="center" src="../static/image/confused.gif" alt="Confusing" style="width:400px;height:300px;">
+
       <div class="container" style="text-align:center">
           <form name="mainform" action="predict/" class="form" method="POST" enctype="multipart/form-data">
               {%csrf_token%}
@@ -19,14 +22,13 @@
               <input type="text" class="form-control" name="sentences" rows="4">
               <label for="textfile">Or upload file here: </label>
               <input id="textfile" type="file" name="textfile">
+                <p align="right">
+                    <INPUT Type="BUTTON" Value="Train!" style="color: blue" Onclick="window.location.href='http://127.0.0.1:8000/train/'">
+                </p>
               <input type="submit" id="predict" name="predict" class="btn btn-success" value="Feel">
           </form>
 
-            <br>
-            <br>
-            <p align="center">
-                <INPUT Type="BUTTON" Value="Train"  Onclick="window.location.href='http://127.0.0.1:8000/train/'">
-            </p>
+
 
       </div>
   </body>

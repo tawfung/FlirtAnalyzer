@@ -44,6 +44,9 @@ Version 2: Analyse deep text. (When I start? I don't know. :D)
         ```
         workon venv
         ```
+    + Recommended IDE:
+        - PyCharm Jetbrain
+        
     
 * #### Run:
     + Install libs:
@@ -56,5 +59,5 @@ Version 2: Analyse deep text. (When I start? I don't know. :D)
         
         => Open browser(firefox) and type this address to enjoy: [localhost:8000/](http://localhost:8000/).
         
-        => Train model: [localhost:8000/train/](localhost:8000/train/).
+        => Train model: [localhost:8000/train/](http://localhost:8000/train/).
          
