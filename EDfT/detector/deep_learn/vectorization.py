@@ -87,7 +87,7 @@ class Vectorizer:
     def processTokenFile(self):
         # stemmer = LancasterStemmer()
         stemmer = PorterStemmer()
-        with open("detector/deep_learn/emotion_lexicon_dic.txt", 'r') as f:
+        with open("detector/data/emotion_lexicon_dic.txt", 'r') as f:
             lex_dic = f.read()
         lex_dic = lex_dic.split("\n")
         a = 0
@@ -104,13 +104,13 @@ class Vectorizer:
                          'on', 'me', 'of', '.', 'in',
                          'that', 'he', 'she', 'it', 'by']
 
-        if not os.path.isfile('detector/deep_learn/vectorization.csv'):
-            open('detector/deep_learn/vectorization.csv', 'w')
-        with open('detector/deep_learn/vectorization.csv', 'w') as vectorsFile:
+        if not os.path.isfile('detector/data/vectorization.csv'):
+            open('detector/data/vectorization.csv', 'w')
+        with open('detector/data/vectorization.csv', 'w') as vectorsFile:
             vectorsFile.write('')
 
         # Tokenize angryTokens.txt file
-        with open('detector/deep_learn/angryTokens.txt', 'r') as f:
+        with open('detector/data/angryTokens.txt', 'r') as f:
             angry = f.read()
         angryTokens = sent_tokenize(angry)
 
@@ -133,15 +133,15 @@ class Vectorizer:
                         break
             featureVector.append(0)
 
-            # write to detector/deep_learn/vectorization.csv file
+            # write to detector/data/vectorization.csv file
             for k in range(0, 10):
-                with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+                with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                     vectorsFile.write(str(featureVector[k]) + ',')
-            with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+            with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                 vectorsFile.write(str(featureVector[10]) + '\n')
 
-        # Tokenize disgustTokens.txt file
-        with open('detector/deep_learn/sadnessTokens.txt', 'r') as f:
+        # Tokenize sadnessTokens.txt file
+        with open('detector/data/sadnessTokens.txt', 'r') as f:
             sad = f.read()
         sadTokens = sent_tokenize(sad)
 
@@ -164,15 +164,15 @@ class Vectorizer:
                         break
             featureVector.append(1)
 
-            # write to detector/deep_learn/vectorization.csv file
+            # write to detector/data/vectorization.csv file
             for k in range(0, 10):
-                with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+                with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                     vectorsFile.write(str(featureVector[k]) + ',')
-            with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+            with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                 vectorsFile.write(str(featureVector[10]) + '\n')
 
         # Tokenize joyTokens.txt file
-        with open('detector/deep_learn/joyTokens.txt', 'r') as f:
+        with open('detector/data/joyTokens.txt', 'r') as f:
             joy = f.read()
         joyTokens = sent_tokenize(joy)
 
@@ -195,22 +195,22 @@ class Vectorizer:
                         break
             featureVector.append(2)
 
-            # write to detector/deep_learn/vectorization.csv file
+            # write to detector/data/vectorization.csv file
             for k in range(0, 10):
-                with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+                with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                     vectorsFile.write(str(featureVector[k]) + ',')
-            with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+            with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                 vectorsFile.write(str(featureVector[10]) + '\n')
 
 
-        with open('detector/deep_learn/vectorization.csv', 'r') as f:
+        with open('detector/data/vectorization.csv', 'r') as f:
             features = f.read()
         features = features.split('\n')
-        with open('detector/deep_learn/vectorization.csv', 'w') as vectorsFile:
+        with open('detector/data/vectorization.csv', 'w') as vectorsFile:
             vectorsFile.write('')
 
         for i in range(0, 1040):
-            with open('detector/deep_learn/vectorization.csv', 'a') as vectorsFile:
+            with open('detector/data/vectorization.csv', 'a') as vectorsFile:
                 vectorsFile.write(features[i] + '\n')
                 vectorsFile.write(features[i + 1040] + '\n')
                 vectorsFile.write(features[3117 - i] + '\n')
@@ -218,7 +218,7 @@ class Vectorizer:
     def vectorize(self, sentences):
         # s = LancasterStemmer()
         s = PorterStemmer()
-        with open("detector/deep_learn/emotion_lexicon_dic.txt", 'r') as f:
+        with open("detector/data/emotion_lexicon_dic.txt", 'r') as f:
             lex_dic = f.read()
         lex_dic = lex_dic.split("\n")
         a = 0
@@ -233,9 +233,9 @@ class Vectorizer:
                          'were', 'to', 'at', 'i', 'my',
                          'on', 'me', 'of', '.', 'in',
                          'that', 'he', 'she', 'it', 'by']
-        if not os.path.isfile('detector/deep_learn/featureVectorForSentence.csv'):
-            open('detector/deep_learn/featureVectorForSentence.csv', 'w')
-        with open('detector/deep_learn/featureVectorForSentence.csv', 'w') as featuresFile:
+        if not os.path.isfile('detector/data/featureVectorForSentence.csv'):
+            open('detector/data/featureVectorForSentence.csv', 'w')
+        with open('detector/data/featureVectorForSentence.csv', 'w') as featuresFile:
             featuresFile.write('')
 
         for x in sentences:
@@ -257,18 +257,18 @@ class Vectorizer:
                         break
             # write this feature vector to featureVectors File
             for k in range(0, 9):
-                with open('detector/deep_learn/featureVectorForSentence.csv', 'a') as featuresFile:
+                with open('detector/data/featureVectorForSentence.csv', 'a') as featuresFile:
                     featuresFile.write(str(featureVector[k]) + ',')
-            with open('detector/deep_learn/featureVectorForSentence.csv', 'a') as featuresFile:
+            with open('detector/data/featureVectorForSentence.csv', 'a') as featuresFile:
                 featuresFile.write(str(featureVector[9]) + '\n')
         # to avoid one Sentence Error
         for k in range(0, 9):
-            with open('detector/deep_learn/featureVectorForSentence.csv', 'a') as featuresFile:
+            with open('detector/data/featureVectorForSentence.csv', 'a') as featuresFile:
                 featuresFile.write(str(featureVector[k]) + ',')
-        with open('detector/deep_learn/featureVectorForSentence.csv', 'a') as featuresFile:
+        with open('detector/data/featureVectorForSentence.csv', 'a') as featuresFile:
             featuresFile.write(str(featureVector[9]) + '\n')
 
-        return np.loadtxt("detector/deep_learn/featureVectorForSentence.csv", delimiter=",")
+        return np.loadtxt("detector/data/featureVectorForSentence.csv", delimiter=",")
 
     def start(self, mode='train', text=None):
 

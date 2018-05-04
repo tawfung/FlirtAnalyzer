@@ -22,7 +22,7 @@ class Classifier:
         tf_session = tf.Session()
         K.set_session(tf_session)
 
-        with open('detector/deep_learn/emotion_lexicon_dic.txt', 'r') as f:
+        with open('detector/data/emotion_lexicon_dic.txt', 'r') as f:
             lex_dic = f.read()
         lex_dic = lex_dic.split('\n')
         a = 0
@@ -41,7 +41,7 @@ class Classifier:
 
         # If not self.model:
         self.load_model()
-        dataset = np.loadtxt('detector/deep_learn/featureVectorForSentence.csv', delimiter=',')
+        dataset = np.loadtxt('detector/data/featureVectorForSentence.csv', delimiter=',')
         X = dataset[:-1, :]
         predictions = self.model.predict(X)
         rounded = np.around(predictions, decimals=0)
@@ -50,7 +50,7 @@ class Classifier:
         c = 1
 
 
-        with open('detector/deep_learn/daily-log.csv', 'a') as daily:
+        with open('detector/data/daily-log.csv', 'a') as daily:
 
             with tf_session.as_default():
                 for x in rounded:

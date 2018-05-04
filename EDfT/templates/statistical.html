@@ -18,7 +18,7 @@
                     var dataPoints = csvLines = points = [];
                     csvLines = csv.split(/[\r?\n|\r|\n]+/);
 
-                    for (var i = (csvLines.length - 6); i < csvLines.length; i++)
+                    for (var i = (csvLines.length - 7); i < csvLines.length; i++)
                         if (csvLines[i].length > 0) {
                             points = csvLines[i].split(",");
                             dataPoints.push({
@@ -96,7 +96,11 @@
     <body>
 
         <div id="chartContainer" style="height: 500px; max-width: 100%; margin: 0px auto;"></div>
+        <br>
+        <br>
+        <p align="center">
+            <INPUT Type="BUTTON" Value="Home!"  Onclick="window.location.href='http://127.0.0.1:8000/'">
+        </p>
 
-	</div>
     </body>
 </html>

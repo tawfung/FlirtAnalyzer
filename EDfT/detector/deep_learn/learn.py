@@ -14,7 +14,7 @@ class Trainer:
         tf_session = tf.Session()
         K.set_session(tf_session)
 
-        data_set = np.loadtxt("detector/deep_learn/vectorization.csv", delimiter=",")
+        data_set = np.loadtxt("detector/data/vectorization.csv", delimiter=",")
         # data_size = len(data_set)
 
         # # Change those according to your needs

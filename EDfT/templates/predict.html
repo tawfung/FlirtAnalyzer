@@ -53,13 +53,13 @@
 {#    </script>#}
 </head>
 <body>
-    <div id="chartContainer" style="height: 400px; max-width: 1000px; margin: 0px auto;"></div>
+    <div id="chartContainer" style="height: 600px; max-width: 1000px; margin: 0px auto;"></div>
     <script src="{% static 'js/canvasjs.min.js'%}"></script>
 
     <form name="mainform" action="statistical/" class="form" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
 
-        <input type="button" value="Go back!" onclick="history.back()" class="left">
+        <input type="button" value="Back!" onclick="history.back()" class="left">
 
         <input type="submit" value="Statistic!" id="statistical" name="statistical" class="btn btn-success pull-right">
     </form>

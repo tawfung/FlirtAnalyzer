@@ -7,7 +7,7 @@ class Statistical:
     def __index__(self):
         pass
     def stat(self):
-        data = pd.read_csv('detector/deep_learn/daily-log.csv')
+        data = pd.read_csv('detector/data/daily-log.csv')
         dat = pd.read_csv('static/stat-log.csv')
         with open('static/stat-log.csv', 'a') as stat:
             counters = [0, 0, 0, 0, 0, 0]
