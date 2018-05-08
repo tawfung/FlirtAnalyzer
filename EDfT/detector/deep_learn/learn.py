@@ -15,26 +15,15 @@ class Trainer:
         K.set_session(tf_session)
 
         data_set = np.loadtxt("detector/data/vectorization.csv", delimiter=",")
-        # data_size = len(data_set)
-
-        # # Change those according to your needs
-        # test_data_size = 800
-        # num_features = 3 # or 5
 
         # # Train Set
-        # inp_vec = data_set[0:(data_size - test_data_size +1), 0:num_features]
-        # out_vec = data_set[0:(data_size - test_data_size +1), num_features]
-        # output_vec_categorical = to_categorical(out_vec)
         #
         inp_vec = data_set[:, 0:10]
         out_vec = data_set[:, 10:]
         output_vec_categorical = to_categorical(out_vec)
 
         # # Test Set
-        # test_in_vec = data_set[test_data_size:, 0:num_features]
-        # test_out_vec = data_set[test_data_size:, num_features]
-        # test_output_vec_categorical = to_categorical(test_out_vec)
-
+        #
         test_in_vec = data_set[0:200, 0:10]
         test_out_vec = data_set[0:200, 10:]
         test_output_vec_categorical = to_categorical(test_out_vec)
@@ -71,7 +60,6 @@ class Trainer:
         model.save_weights('detector/deep_learn/weights')
 
 # =========================  Evaluating Model  =================================#
-#         scores = None
         with tf_session.as_default():
             scores = model.evaluate(test_in_vec, test_output_vec_categorical)
         K.clear_session()

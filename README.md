@@ -49,15 +49,15 @@ Version 2: Analyse deep text. (When I start? I don't know. :D)
         
     
 * #### Run:
-    + Install libs:
+    + Install libs: You can update libraries version inside requirements.txt.
         ```
-        pip install numpy scikit-learn django nltk keras tensorflow==1.5 h5py
+        pip install -r requirements.txt
         ```
     + Run:
         - Switch to app folder: ```cd EDfT```
         - Run app: ```python manager.py runserver```
         
-        => Open browser(firefox) and type this address to enjoy: [localhost:8000/](http://localhost:8000/).
+        => Open browser(firefox/chrome/...) and type this address to enjoy: [localhost:8000/](http://localhost:8000/).
         
         => Train model: [localhost:8000/train/](http://localhost:8000/train/).
          

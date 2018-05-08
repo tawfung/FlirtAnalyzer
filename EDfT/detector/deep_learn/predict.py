@@ -32,10 +32,7 @@ class Classifier:
 
         # s = LancasterStemmer()
         s = PorterStemmer()
-        # unwantedWords = ['the' , 'a', 'is' , 'was' , 'are',
-        #                   'were' , 'to', 'at', 'i' , 'my',
-        #                   'on' , 'me'  , 'of' , '.' , 'in' ,
-        #                   'that' , 'he' , 'she' , 'it' , 'by']
+
         for i in range(0, a - 1):
             lex_dic[i][0] = s.stem(lex_dic[i][0])
 
