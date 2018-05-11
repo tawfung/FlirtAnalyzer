@@ -24,7 +24,7 @@ print(BASE_DIR)
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '9pd6@+w6)w!j(2c&^q_9t28$_sdlu2e5!3ukq-2dij6wt!rqgh'
 # SECRET_KEY = os.environ['SECRET_KEY']
-SECRET_KEY = config('SECRET_KEY')
+# SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
