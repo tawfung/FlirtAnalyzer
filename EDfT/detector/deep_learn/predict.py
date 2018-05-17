@@ -22,19 +22,19 @@ class Classifier:
         tf_session = tf.Session()
         K.set_session(tf_session)
 
-        with open('detector/data/emotion_lexicon_dic.txt', 'r') as f:
-            lex_dic = f.read()
-        lex_dic = lex_dic.split('\n')
-        a = 0
-        for x in lex_dic:
-            lex_dic[a] = x.split(' ')
-            a += 1
-
-        # s = LancasterStemmer()
-        s = PorterStemmer()
-
-        for i in range(0, a - 1):
-            lex_dic[i][0] = s.stem(lex_dic[i][0])
+        # with open('detector/data/emotion_lexicon_dic.txt', 'r') as f:
+        #     lex_dic = f.read()
+        # lex_dic = lex_dic.split('\n')
+        # a = 0
+        # for x in lex_dic:
+        #     lex_dic[a] = x.split(' ')
+        #     a += 1
+        #
+        # # s = LancasterStemmer()
+        # s = PorterStemmer()
+        #
+        # for i in range(0, a - 1):
+        #     lex_dic[i][0] = s.stem(lex_dic[i][0])
 
         # If not self.model:
         self.load_model()
