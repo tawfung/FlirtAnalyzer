@@ -60,6 +60,8 @@ class Classifier:
                     elif x[0] == 0 and x[1] == 0 and x[2] == 1:
                         counters[2] += 1
                         print("Sentence Number " + str(c) + " is Joy")
+                    else:
+                        print("Sentence Number " + str(c) + " is Undefined")
                     c += 1
             K.clear_session()
 

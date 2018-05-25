@@ -12,6 +12,9 @@
             joy = Number({{joy}}); //Joy
             sad = Number({{sad}}); //Sadness
             ang = Number({{ang}}); //Anger
+
+            und = Number({{ und }}); //Undefined
+
             // hap = Number({{hap}}); //Happy
             // sar = Number({{sar}}); //Sarcasm
             {#sha = Number({{ sha }});  //Shame#}
@@ -34,6 +37,7 @@
                         {y:ang, label:"Anger"},
                         {y:sad, label:"Sadness"},
                         {y:joy, label:"Joy"},
+                        {y:und, label:"Undefined"}
 
                         // {y:sha, label:"Shame"},
                         // {y:hap, label:"Happy"},
@@ -59,7 +63,8 @@
     <form name="mainform" action="statistical/" class="form" method="POST" enctype="multipart/form-data">
         {%csrf_token%}
 
-        <input type="button" value="Back!" onclick="history.back()" class="left">
+{#        <input type="button" value="Back!" onclick="history.back()" class="left">#}
+        <input type="button" value="Back!" onclick="window.location.href='http://127.0.0.1:8000/'" class="left">
 
         <input type="submit" value="Statistic!" id="statistical" name="statistical" class="btn btn-success pull-right">
     </form>

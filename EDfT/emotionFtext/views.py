@@ -8,21 +8,17 @@ from detector.deep_learn.statistical import *
 
 # Create your views here.
 def index(request):
-
     return render(request, "home.html")
 
 def train(request):
-
     vectorizer = Vectorizer()
     vectorizer.start(mode='train', text=None)
     trainer = Trainer()
     accur = trainer.start()
     return HttpResponse(accur)
-
     pass
 
 def predict(request):
-
     if 'textfile' in request.POST and 'textfile' not in request.FILES and len(request.POST['sentences']) == 0:
         return HttpResponse("DATA NOT FOUND!")
     sentences = request.POST.get('sentences')
@@ -54,10 +50,11 @@ def predict(request):
     return render(request, 'predict.html', {'result': result,
                                             'ang': result['counters'][0],
                                             'sad': result['counters'][1],
-                                            'joy': result['counters'][2], })
+                                            'joy': result['counters'][2],
+                                            'und': result['total'] - (result['counters'][0]+result['counters'][1]+result['counters'][2])})
 
 def statistical(request):
 
     statistics = Statistical()
-    goal = statistics.stat()
+    statistics.stat()
     return render(request, "statistical.html",)
