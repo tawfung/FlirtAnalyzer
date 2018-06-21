@@ -63,5 +63,8 @@ class Trainer:
         with tf_session.as_default():
             scores = model.evaluate(test_in_vec, test_output_vec_categorical)
         K.clear_session()
-abc
+
+        print("\n%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+        return scores[1]*100.0
+
 
