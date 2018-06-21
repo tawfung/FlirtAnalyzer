@@ -157,8 +157,11 @@ class Vectorizer:
                          'were', 'to', 'at', 'i', 'my',
                          'on', 'me', 'of', '.', 'in',
                          'that', 'he', 'she', 'it', 'by']
-        # negativeWords = ['not', "isn't", "isnt", "aren't",
-        #                  'arent', "doesn't", 'doesnt', "don't", 'dont']
+        negativeWords = ["not", "isn't", "isnt", "aren't",
+                         "arent", "doesn't", "doesnt", "don't",
+                         "dont", "didn't", "didnt", "wasn't",
+                         "weren't", "wasnt", "werent", "hasn't",
+                         "hasnt", "haven't", "havent"]
 
         if not os.path.isfile('detector/data/featureVectorForSentence.csv'):
             open('detector/data/featureVectorForSentence.csv', 'w')
@@ -182,10 +185,11 @@ class Vectorizer:
                         for j in range(0, 10):
                             featureVector[j] = featureVector[j] + int(lex_dic[i][j + 1])
                         break
-                # if word in negativeWords == 1:
-                #     for j in range(0, 10):
-                #         featureVector[j] = 0
-                #     break
+                # check if sentence contain negative words or not
+                if word in negativeWords == 1:
+                    for j in range(0, 9):
+                        featureVector[j] = 0
+                    break
             # write this feature vector to featureVectors File
             for k in range(0, 9):
                 with open('detector/data/featureVectorForSentence.csv', 'a') as featuresFile:
